@@ -3,3 +3,4 @@
 
 ## Artificial Inteligence (AI) NanoDegree (Part 1):
 * [Sudoku](https://github.com/lrekasius/porfolio/tree/master/AI/Project_1.%20Sudoku)
+sd
