@@ -1,0 +1,65 @@
+1. Know how to evaluate model accuracy
+	- accuracy score "accuracy_score(y_test, clf1.predict(X_test)) from sklearn"
+	- confusion matrix "confusion_matrix(y_test,clf1.predict(X_test))"
+	- Recall 	=Eilute=Negatives=Recall: True Positive / (True Positive + False Negative). Out of all the items that are truly positive, how many were correctly classified as positive. Or simply, how many positive items were 'recalled' from the dataset. - recall yra eilute
+		- recall(y_test,clf2.predict(X_test))
+	- Precision	=Stulpelis=Positive=Precision: True Positive / (True Positive + False Positive). Out of all the items labeled as positive, how many truly belong to the positive class. - precision yra stulpelis
+		- precision(y_test,clf2.predict(X_test))
+		
+			- False negative - eilute
+			- Flase positive - stulpelis
+	- F1 = 2 * (precision * recall) / (precision + recall) --------- F1 score reaches its best value at 1 and worst at 0
+	- R2 score - http://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html#sklearn.metrics.r2_score
+	- variance score - http://scikit-learn.org/stable/modules/generated/sklearn.metrics.explained_variance_score.html#sklearn.metrics.explained_variance_score
+
+------------------------------------------------
+	
+	Regression Scoring Functions
+In addition to error metrics, scikit-learn contains two scoring metrics which scale continuously from 0 to 1, with values of 0 being bad and 1 being perfect performance.
+
+These are the metrics that you'll use in the project at the end of the course. They have the advantage of looking similar to classification metrics, with numbers closer to 1.0 being good scores and bad scores tending to be near 0.
+http://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html#sklearn.metrics.r2_score
+One of these is the R2 score, which computes the coefficient of determination of predictions for true values. This is the default scoring method for regression learners in scikit-learn.
+
+The other is the explained variance score. - http://scikit-learn.org/stable/modules/generated/sklearn.metrics.explained_variance_score.html#sklearn.metrics.explained_variance_score
+
+While we will not dive deep into explained variance score and R2 score in this lecture , one important point to remember is that, in general, metrics for regression are such that "higher is better"; that is, higher scores indicate better performance. When using error metrics, such as mean squared error or mean absolute error, we will need to overwrite this preference.
+
+---------------------------------------------------------------------------
+Causes of Error
+
+In model prediction there are two main sources of errors that a model can suffer from. Bias due to a model being unable to represent the complexity of the underlying data and variance due to a model being overly sensitive to the limited data it has been trained on. We will go over both in a bit more detail.
+
+------------------------------------------------
+
+	bias and variances dilema
+	- bias when too few features, variance too many and has overfiting
+	
+	- the more features you add the more data you need. this need grows exponentialy. Curse of dimensionality
+	
+	
+	Learning Curves
+A learning curve in machine learning is a graph that compares the performance of a model on training and testing data over a varying number of training instances.
+When we look at the relationship between the amount of training data and performance, we should generally see performance improve as the number of training points increases.
+By separating training and testing sets and graphing performance on each separately, we can get a better idea of how well the model can generalize to unseen data.
+A learning curve allows us to verify when a model has learned as much as it can about the data. When this occurs, the performance on both training and testing sets plateau and there is a consistent gap between the two error rates.
+	
+	Bias
+When the training and testing errors converge and are quite high this usually means the model is biased. No matter how much data we feed it, the model cannot represent the underlying relationship and therefore has systematic high errors.
+
+	Variance
+When there is a large gap between the training and testing error this generally means the model suffers from high variance. Unlike a biased model, models that suffer from variance generally require more data to improve. We can also limit variance by simplifying the model to represent only the most important features of the data.
+	
+	Ideal Learning Curve
+The ultimate goal for a model is one that has good performance that generalizes well to unseen data. In this case, both the testing and training curves converge at similar values. The smaller the gap between the training and testing sets, the better our model generalizes. The better the performance on the testing set, the better our model performs.
+	
+	Model Complexity
+The visual technique of graphing performance is not limited to learning. With most models, we can change the complexity by changing the inputs or parameters.
+A model complexity graph looks at training and testing curves as the model's complexity varies. The most common trend is that as a model's complexity increases, bias will fall off and variance will rise
+Scikit-learn provides a tool for validation curves which can be used to monitor model complexity by varying the parameters of a model. We'll explore the specifics of how these parameters affect complexity in the next course on supervised learning.
+
+	Learning Curves and Model Complexity
+So what is the relationship between learning curves and model complexity?
+If we were to take the learning curves of the same machine learning algorithm with the same fixed set of data, but create several graphs at different levels of model complexity, all the learning curve graphs would fit together into a 3D model complexity graph.
+If we took the final testing and training errors for each model complexity and visualized them along the complexity of the model we would be able to see how well the model performs as the model complexity increases.
+

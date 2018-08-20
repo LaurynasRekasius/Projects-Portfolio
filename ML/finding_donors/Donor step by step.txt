@@ -1,0 +1,165 @@
+	-k neares neighbor KNN method. select K number nearest elements and takes the average value.
+	- parametric is biased because we have idea how the model will looks like, non-parametric is un-biased because we don't know
+		canon is parametric and attracted bees is non-parametric
+		
+		
+REGRESION
+
+#
+#
+# Regression and Classification programming exercises
+#
+#
+
+
+#
+#	In this exercise we will be taking a small data set and computing a linear function
+#	that fits it, by hand.
+#	
+
+#	the data set
+
+import numpy as np
+
+sleep = [5,6,7,8,10]
+scores = [65,51,75,75,86]
+
+
+def compute_regression(sleep,scores):
+
+    #	First, compute the average amount of each list
+
+    avg_sleep = np.mean(sleep)
+    avg_scores = np.mean(scores)
+
+    #	Then normalize the lists by subtracting the mean value from each entry
+
+    normalized_sleep = [x - avg_sleep for x in sleep]
+    normalized_scores = [x - avg_scores for x in scores]
+
+    #	Compute the slope of the line by taking the sum over each student
+    #	of the product of their normalized sleep times their normalized test score.
+    #	Then divide this by the sum of squares of the normalized sleep times.
+
+    slope = (np.sum(np.multiply(normalized_sleep, normalized_scores)) / np.sum(np.multiply(normalized_sleep, normalized_sleep)))
+
+    #	Finally, We have a linear function of the form
+    #	y - avg_y = slope * ( x - avg_x )
+    #	Rewrite this function in the form
+    #	y = m * x + b
+    #	Then return the values m, b
+    
+    m = slope
+    b = slope * (-avg_sleep) + avg_scores
+    
+    return m,b
+
+
+if __name__=="__main__":
+    m,b = compute_regression(sleep,scores)
+    print "Your linear model is y={}*x+{}".format(m,b)
+	
+
+	-----------------------
+	- Instances - input
+	- concept - function
+	- target concept - answer, specific function
+	- hypothesis class - all possible function (clasification)
+	- sample - training set
+	- candidate - concept, target concept (features you think are useful)
+	- testing set - see if the target concept is a good one
+	
+	
+	- entropy. How pure/impure is sample 0 - pure, 1 - 50/50 distribution. −∑​i​(p​i)log​2(p​i)
+----------------------------------------------------------------------------------
+PROJECT---------------------------
+----------------------------------------
+
+For getting rows use - df.index
+and for columns use - df.columns
+to count them you can use len()
+
+----------------------------------------------------------------
+---------------------------------------------------------------------------------
+FILTER OUT THE COLUMN
+data.loc[data['income'] == '>50K']
+
+To select rows whose column value equals a scalar, some_value, use ==:
+
+df.loc[df['column_name'] == some_value]
+To select rows whose column value is in an iterable, some_values, use isin:
+
+df.loc[df['column_name'].isin(some_values)]
+To select rows whose column value does not equal some_value, use !=:
+
+df.loc[df['column_name'] != some_value]
+isin returns a boolean Series, so to select rows whose value is not in some_values, negate the boolean Series using ~:
+
+df.loc[~df['column_name'].isin(some_values)]
+For example,
+
+import pandas as pd
+import numpy as np
+df = pd.DataFrame({'A': 'foo bar foo bar foo bar foo foo'.split(),
+                   'B': 'one one two three two two one three'.split(),
+                   'C': np.arange(8), 'D': np.arange(8) * 2})
+print(df)
+#      A      B  C   D
+# 0  foo    one  0   0
+# 1  bar    one  1   2
+# 2  foo    two  2   4
+# 3  bar  three  3   6
+# 4  foo    two  4   8
+# 5  bar    two  5  10
+# 6  foo    one  6  12
+# 7  foo  three  7  14
+
+print(df.loc[df['A'] == 'foo'])
+yields
+
+     A      B  C   D
+0  foo    one  0   0
+2  foo    two  2   4
+4  foo    two  4   8
+6  foo    one  6  12
+7  foo  three  7  14
+If you have multiple values you want to include, put them in a list (or more generally, any iterable) and use isin:
+
+print(df.loc[df['B'].isin(['one','three'])])
+yields
+
+     A      B  C   D
+0  foo    one  0   0
+1  bar    one  1   2
+3  bar  three  3   6
+6  foo    one  6  12
+7  foo  three  7  14
+Note, however, that if you wish to do this many times, it is more efficient to make an index first, and then use df.loc:
+
+df = df.set_index(['B'])
+print(df.loc['one'])
+yields
+
+       A  C   D
+B              
+one  foo  0   0
+one  bar  1   2
+one  foo  6  12
+or, to include multiple values from the index use df.index.isin:
+
+df.loc[df.index.isin(['one','two'])]
+yields
+
+       A  C   D
+B              
+one  foo  0   0
+one  bar  1   2
+two  foo  2   4
+two  foo  4   8
+two  bar  5  10
+one  foo  6  12
+
+
+
+--------------------------------------------------------------------------------
+----------------------------------------------------------------------------------

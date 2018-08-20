@@ -1,0 +1,39 @@
+1. install anaconda 2.7
+
+2. download the project from Udacity GitHub folder
+	- on the website fork the folder . this https://github.com/udacity/machine-learning or only titanic folder
+	- then grab the link from website to your forked folder like https://github.com/lrekasius/machine-learning.git
+	- download loacaly. in the git bach navigate to the folder where you want to download and use 'git clone https://github.com/lrekasius/machine-learning.git'
+	
+2. open command prompt and navigate to the downloaded files
+	- to change the driver letter jest enter 'd:' and press enter
+	- then use cd to navigate to titanic folder. You can use TAB to autocpmplete folder names
+	- when in the folder enter 'jupyter notebook titanic_survival_exploration.ipynb'
+	
+3. You need to know how to write 'if' statements in Python. For example:
+	-  if (passenger['Sex'] == 'female') or (passenger['Sex'] == 'male' and passenger['Age'] < 10):
+            predictions.append(1)
+        else:
+            predictions.append(0)
+	- It is also good to know how to define variables
+        sex = passenger['Sex']
+        age = passenger['Age']
+        pclass = passenger['Pclass']
+
+4. Explore more in deep the data set. In other words continue to build desicion tree. 
+	- To get accuracy above 80% I explored the fallowing variables: Pclass, Sex, Age, SibSp, Parch. 
+	  I looked at different variables cuts by age and sex and this let me conclude that men survival rate also dependent not only the age,
+	  but also on the ticket class they had. Higher class = higher chance of survival, so this observation let me to increase young boys age 
+	  who survived from 10 years old to 16 and this resulted in 80.02% accuracy. However, I continued to investigate how to increase 
+	  prediction among women. I found out that women in the lowest class and around 40-50 years old also had higher mortality. 
+	  By joining together these two observations I was able to reach 80.92% accuracy for model. 
+	- if (passenger['Sex'] == 'female'):
+            if (passenger['Pclass'] == 3 and passenger['Age'] > 40 and passenger['Age'] < 50 ):
+                predictions.append(0)
+            else:
+                predictions.append(1)   
+        elif (passenger['Sex'] == 'male'):
+            if  (passenger['Age'] < 16 and passenger['Pclass'] < 3):
+                 predictions.append(1)
+            else:
+                predictions.append(0)
